@@ -20,12 +20,12 @@
                         (<= (Integer/parseInt %) 2030))
             "hgt" #(let [n (count %)
                         unit (subs % (- n 2) n)
-                        high (Integer/parseInt (subs % 0 (- n 2)))]
+                        high (subs % 0 (- n 2))]
                    (cond
-                     (= "cm" unit) (and (>=  high 150)
-                                        (<=  high 193))
-                     (= "in" unit) (and (>=  high 59)
-                                        (<=  high 76))
+                     (= "cm" unit) (and (>=  (Integer/parseInt high) 150)
+                                        (<=  (Integer/parseInt high) 193))
+                     (= "in" unit) (and (>=  (Integer/parseInt high) 59)
+                                        (<=  (Integer/parseInt high) 76))
                      :else false))
             "hcl" #(some? (re-matches #"\#[0-9a-f]{6}" %))
             "ecl" #(contains? (set '("amb" "blu" "brn" "gry" "grn" "hzl" "oth")) %)
@@ -64,7 +64,7 @@
      ))
 
 (defn part-2 []
-  (->> (read-file "resources/day4-sample.txt")
+  (->> (read-file "resources/day4-input.txt")
        (partition-by #(= "" %))
        (filter #(not= % [""]))
        (map #(str/join " " %))
@@ -72,8 +72,10 @@
        (filter #(every? (fn [[k f]]
                           (let [_ (print (get % k))]
                              (and (contains? % k)
-                                  (f (get % k))))) rules))))
+                                  (f (get % k))))) rules))
+       (count)))
 (part-2)
+
 
 (def t {"eyr" "1972" "cid" "100"
         "hcl" "#18171d" "ecl" "amb" "hgt" "170" "pid" "186cm" "iyr" "2018" "byr" "1926"})
