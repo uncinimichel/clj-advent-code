@@ -1,6 +1,13 @@
 (ns clj-playground.day5)
 (require '[clojure.string :as str])
 
+(defn read-file [filename]
+  (->> filename
+       slurp
+       str/split-lines
+       seq))
+
+
 (defn find-seat [min max id left right]
   (loop [mi min
          ma max
