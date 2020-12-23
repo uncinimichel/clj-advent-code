@@ -1,4 +1,4 @@
-(ns clj-playground.day5)
+(ns clj-playground.day6)
 (require '[clojure.string :as str])
 
 

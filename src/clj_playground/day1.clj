@@ -10,5 +10,5 @@
         b numbers
         c numbers
         :when(< a b c)
-        :when(= 2020 (+ a b c))]
+        :when(= 20000000 (+ a b c))]
     [(* c a b)]))
